@@ -3,6 +3,7 @@
 
 import requests
 import datetime
+import time
 
 # Liest das Datum und formatiert es in "Monat / Tag / Jahr".
 
@@ -47,14 +48,40 @@ url = 'https://ddl-warez.to/?search=' + searchQuery.replace(' ', '_')
 #print(pInfo + 'Ihre Query: ' + searchQuery)
 #print(pInfo + 'Der fertige URL: ' + url)
 
+aZeit = time.time()
+
 r = requests.get(url)
 
 if str(r.status_code).startswith('2'):
     print(pInfo + 'Die Verbindung wurde erfolgreich aufgebaut.')
     
     log(wPostDatum, searchQuery, str(r.status_code))
+    
+    # Stoppt die Zeit
+
+    eZeit = time.time()
+    zZeit = eZeit- aZeit
+    
+    sep = '.'
+    tZeit = str(zZeit).split(sep, 1)[0]
+
+    # Giebt die gestoppte Zeit in Sekunden wieder
+
+    print(pInfo + 'Das besuchen der Seite hat ' + tZeit + " ganze Sekunden gedauert.")
 
 else:
     print(pError + 'Die Verbingung konnte nicht erfolgreich aufgebaut werden!')
 
     log(wPostDatum, searchQuery, str(r.status_code))
+    
+    # Stoppt die Zeit
+
+    eZeit = time.time()
+    zZeit = eZeit- aZeit
+    
+    sep = '.'
+    tZeit = str(zZeit).split(sep, 1)[0]
+
+    # Giebt die gestoppte Zeit in Sekunden wieder
+
+    print(pInfo + 'Das besuchen der Seite hat ' + tZeit + " ganze Sekunden gedauert.")
